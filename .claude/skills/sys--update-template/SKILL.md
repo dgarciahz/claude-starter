@@ -1,6 +1,6 @@
 # Skill: Update Template
 
-Sincroniza los skills y el `.mcp.json` del proyecto actual al repositorio template `claude-starter`, para que los próximos proyectos partan de la versión más reciente.
+Sincroniza los skills, agents y el `.mcp.json` del proyecto actual al repositorio template `claude-starter`, para que los próximos proyectos partan de la versión más reciente.
 
 ## Trigger
 
@@ -10,6 +10,14 @@ Usar cuando el usuario invoque `/sys--update-template` o pida sincronizar / prop
 
 - **Ruta local del template**: `C:\david\development\claude-templates\claude-starter`
 - **Repo remoto**: `https://github.com/dgarciahz/claude-starter`
+
+## Agents incluidos en el template
+
+Solo se sincronizan estos agents (lista explícita). El usuario puede tener agents propios en el proyecto que NO deben subirse al template:
+
+- `test-architect.md`
+
+Si el usuario pide añadir o quitar un agent de esta lista, actualiza el SKILL.md antes de continuar.
 
 ## Skills incluidos en el template
 
@@ -44,7 +52,13 @@ No copies skills que no estén en la lista — pueden ser skills específicos de
 
 No copies `.claude/settings.local.json` ni ningún otro archivo de `.claude/` que no sea `skills/`.
 
-### 3. Sincronizar .mcp.json (con sanitización)
+### 3. Sincronizar agents
+
+Copia **solo los agents de la lista anterior** desde `.claude/agents/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\agents\`, sobreescribiendo los archivos existentes.
+
+No copies agents que no estén en la lista — pueden ser agents específicos del proyecto activo.
+
+### 4. Sincronizar .mcp.json (con sanitización)
 
 Lee el `.mcp.json` del proyecto actual. Antes de copiarlo al template:
 - Reemplaza el valor de `N8N_API_KEY` por `"TU_API_KEY_AQUI"`
@@ -52,18 +66,18 @@ Lee el `.mcp.json` del proyecto actual. Antes de copiarlo al template:
 
 Escribe el resultado en `C:\david\development\claude-templates\claude-starter\.mcp.json`.
 
-### 4. Sincronizar CLAUDE.md (opcional)
+### 5. Sincronizar CLAUDE.md (opcional)
 
 Si el usuario indicó explícitamente que quiere actualizar también el `CLAUDE.md`, cópialo. Si no lo mencionó, pregunta antes de hacerlo — el CLAUDE.md suele tener contenido específico del proyecto activo.
 
-### 5. Hacer commit y push en el template
+### 6. Hacer commit y push en el template
 
 Desde `C:\david\development\claude-templates\claude-starter`:
 - `git add .`
-- `git commit -m "Sincroniza skills desde [nombre del proyecto actual] — [fecha]"`
+- `git commit -m "Sincroniza skills/agents desde [nombre del proyecto actual] — [fecha]"`
 - `git push`
 
-### 6. Confirmar
+### 7. Confirmar
 
 Informa al usuario de:
 - Qué archivos fueron actualizados
