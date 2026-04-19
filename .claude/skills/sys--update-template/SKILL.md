@@ -11,6 +11,23 @@ Usar cuando el usuario invoque `/sys--update-template` o pida sincronizar / prop
 - **Ruta local del template**: `C:\david\development\claude-templates\claude-starter`
 - **Repo remoto**: `https://github.com/dgarciahz/claude-starter`
 
+## Skills incluidos en el template
+
+Solo se sincronizan estos skills (lista explícita). El usuario puede tener skills propios en el proyecto que NO deben subirse al template:
+
+- `gh--push`
+- `n8n--code-javascript`
+- `n8n--code-python`
+- `n8n--expression-syntax`
+- `n8n--mcp-tools-expert`
+- `n8n--node-configuration`
+- `n8n--validation-expert`
+- `n8n--workflow-patterns`
+- `sys--context-report`
+- `sys--update-template`
+
+Si el usuario pide añadir o quitar un skill de esta lista, actualiza el SKILL.md antes de continuar.
+
 ## Instrucciones
 
 Sigue estos pasos en orden:
@@ -21,7 +38,9 @@ Comprueba que existe `C:\david\development\claude-templates\claude-starter\.git`
 
 ### 2. Sincronizar skills
 
-Copia recursivamente el directorio `.claude/skills/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\skills\`, sobreescribiendo los archivos existentes.
+Copia **solo los skills de la lista anterior** desde `.claude/skills/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\skills\`, sobreescribiendo los archivos existentes.
+
+No copies skills que no estén en la lista — pueden ser skills específicos del proyecto activo.
 
 No copies `.claude/settings.local.json` ni ningún otro archivo de `.claude/` que no sea `skills/`.
 
