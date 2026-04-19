@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__n8n-mcp__n8n_get_workflow",
+      "mcp__n8n-mcp__n8n_update_full_workflow",
+      "mcp__n8n-mcp__n8n_validate_workflow",
+      "mcp__n8n-mcp__n8n_delete_workflow",
+      "Bash(mv \"C:/david/development/visual_studio/learning/claude_code_test1/.claude/agents/github-push/github-commit.md\" \"C:/david/development/visual_studio/learning/claude_code_test1/.claude/agents/github-push/github-push.md\")",
+      "Bash(mv \"C:/david/development/visual_studio/learning/claude_code_test1/.claude/agents/github-push/commit_push.sh\" \"C:/david/development/visual_studio/learning/claude_code_test1/.claude/agents/github-push/github_push.sh\")",
+      "Bash(git -C C:/david/development/visual_studio/learning/claude_code_test1 status --short)",
+      "Bash(git:*)",
+      "Bash(cygpath:*)",
+      "Bash(bash:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "n8n-mcp",
+    "playwright"
+  ]
+}
