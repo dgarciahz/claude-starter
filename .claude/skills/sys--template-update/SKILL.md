@@ -33,6 +33,7 @@ Solo se sincronizan estos skills (lista explícita). El usuario puede tener skil
 - `n8n--workflow-patterns`
 - `sys--context-report`
 - `sys--template-init`
+- `sys--template-sync`
 - `sys--template-update`
 
 Si el usuario pide añadir o quitar un skill de esta lista, actualiza el SKILL.md antes de continuar.
