@@ -48,22 +48,37 @@ git checkout template/main -- .claude/skills/
 git checkout template/main -- .claude/agents/
 ```
 
-### 5. Commit de los cambios
+### 5. Comparar MCP servers del catálogo con el proyecto
+
+Lee el archivo `.claude/skills/sys--template-update/MCP_SERVERS.md` recién descargado y compáralo con el `.mcp.json` del proyecto (si existe).
+
+Si hay servers en el catálogo que **no están en el proyecto**, muéstralos al usuario:
+> "El catálogo del template tiene estos servers que no tienes configurados: [lista]. ¿Quieres añadir alguno?"
+
+Usa `AskUserQuestion` con multiSelect para que el usuario elija. Para los elegidos:
+- Pide las credenciales necesarias
+- Detecta la ruta de `npx` según el SO (Windows: `C:\Program Files\nodejs\npx.cmd`, Unix: `npx`)
+- Actualiza `.mcp.json` y `enabledMcpjsonServers` en `.claude/settings.local.json`
+
+Si no hay diff de MCP servers (o el usuario no quiere ninguno), continúa sin tocar la config MCP.
+
+### 6. Commit de los cambios
 
 ```bash
-git add .claude/skills/ .claude/agents/
+git add .claude/skills/ .claude/agents/ .mcp.json
 git commit -m "Sincroniza skills/agents desde template claude-starter — <fecha>"
 ```
 
-### 6. Confirmar al usuario
+### 7. Confirmar al usuario
 
 Informa de:
 - Qué skills/agents fueron actualizados
 - Si hay skills nuevos que no existían antes en el proyecto
-- Recordatorio: NO se ha tocado `.mcp.json` ni `settings.local.json`
+- Qué MCP servers se añadieron (si los hay)
+- Recordatorio: reiniciar Claude Code si se añadieron MCP servers nuevos
 
 ## Notas
 
-- NUNCA toques `.mcp.json`, `settings.local.json` ni ningún otro archivo fuera de `.claude/skills/` y `.claude/agents/`.
-- Si el usuario quiere actualizar también los MCP servers, debe ejecutar `/sys--template-init`.
+- NUNCA sobreescribas `.mcp.json` completo si ya existe — solo añade los servers nuevos elegidos.
+- NUNCA sobreescribas `.claude/settings.local.json` completo — haz merge de `enabledMcpjsonServers`.
 - Este skill es idempotente: ejecutarlo varias veces no causa daño.

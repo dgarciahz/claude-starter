@@ -75,11 +75,21 @@ Copia **solo los agents de la lista anterior** desde `.claude/agents/` del proye
 
 No copies agents que no estén en la lista — pueden ser agents específicos del proyecto activo.
 
-### 5. Sincronizar MCP_SERVERS.md
+### 5. Actualizar MCP_SERVERS.md (catálogo del template)
 
-Copia el archivo `MCP_SERVERS.md` del directorio de este skill (`.claude/skills/sys--template-update/MCP_SERVERS.md`) a `C:\david\development\claude-templates\claude-starter\.claude\skills\sys--template-update\MCP_SERVERS.md`.
+Lee el `.mcp.json` del proyecto actual y compáralo con el catálogo `.claude/skills/sys--template-update/MCP_SERVERS.md`.
 
-Este archivo es el catálogo de MCP servers recomendados que `sys--template-init` consume al inicializar proyectos nuevos.
+Si hay servers en el proyecto que **no están en el catálogo**, pregunta al usuario:
+> "Estos servers están en tu proyecto pero no en el catálogo del template: [lista]. ¿Los añado?"
+
+Para cada server que el usuario apruebe, añade una entrada al `MCP_SERVERS.md` con:
+- Nombre del server
+- Paquete npx
+- Variables necesarias (sin valores reales — solo los nombres)
+- Descripción de uso
+
+Una vez actualizado el `MCP_SERVERS.md`, cópialo al template:
+`C:\david\development\claude-templates\claude-starter\.claude\skills\sys--template-update\MCP_SERVERS.md`
 
 No copies `.mcp.json` ni `settings.local.json` — contienen rutas absolutas y credenciales específicas de cada máquina.
 

@@ -40,15 +40,21 @@ git checkout template/main -- .claude/skills/
 git checkout template/main -- .claude/agents/
 ```
 
-### 4. Leer el catálogo de MCP servers
+### 4. Leer el catálogo de MCP servers y calcular el diff
 
 Lee el archivo `.claude/skills/sys--template-update/MCP_SERVERS.md` que acaba de descargarse.
 
-### 5. Preguntar al usuario qué servers quiere configurar
+Si ya existe un `.mcp.json` en el proyecto, compara los servers del catálogo con los ya configurados. Separa:
+- **Servers nuevos**: están en el catálogo pero no en `.mcp.json` → candidatos a instalar
+- **Servers existentes**: ya configurados → no tocar
 
-Para cada servidor del catálogo, pregunta si quiere incluirlo en el proyecto. Usa `AskUserQuestion` con multiSelect si hay varios de golpe, o pregunta uno a uno si el catálogo es largo.
+### 5. Preguntar al usuario qué servers nuevos quiere configurar
 
-Para los servers que requieren credenciales (`N8N_API_URL`, `N8N_API_KEY`, etc.), solicítalas al usuario en este paso.
+Muestra solo los servers que no están aún en el proyecto. Pregunta cuáles quiere añadir usando `AskUserQuestion` con multiSelect.
+
+Si es un proyecto completamente nuevo (sin `.mcp.json`), ofrece todos los del catálogo.
+
+Para los servers elegidos que requieren credenciales (`N8N_API_URL`, `N8N_API_KEY`, etc.), solicítalas al usuario en este paso.
 
 ### 6. Detectar la ruta de npx según el SO
 
