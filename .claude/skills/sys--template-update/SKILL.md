@@ -24,13 +24,7 @@ Si el usuario pide añadir o quitar un agent de esta lista, actualiza el SKILL.m
 Solo se sincronizan estos skills (lista explícita). El usuario puede tener skills propios en el proyecto que NO deben subirse al template:
 
 - `gh--push`
-- `n8n--code-javascript`
-- `n8n--code-python`
-- `n8n--expression-syntax`
-- `n8n--mcp-tools-expert`
-- `n8n--node-configuration`
-- `n8n--validation-expert`
-- `n8n--workflow-patterns`
+- `n8n--init`
 - `per--history`
 - `per--init`
 - `per--session-close`
