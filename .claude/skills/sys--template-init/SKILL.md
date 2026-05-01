@@ -92,23 +92,32 @@ Añade los servers elegidos a `enabledMcpjsonServers`. Si el archivo no existe, 
 }
 ```
 
-### 9. Commit de los cambios
+### 9. Ejecutar inits de bloque
+
+Llama a cada skill de la siguiente lista en orden. Si alguno falla, informa al usuario pero continúa con el resto — un init fallido no debe bloquear los demás.
+
+**Lista de inits de bloque:**
+- `per--init` — inicializa el sistema de personalización persistente
+
+Para invocar cada uno, indícale al usuario que el skill se ejecutará automáticamente, y procede a seguir sus instrucciones como si el usuario lo hubiera invocado directamente.
+
+### 10. Commit de los cambios
 
 ```bash
 git add .claude/ .mcp.json
 git commit -m "Inicializa proyecto desde template claude-starter — <fecha>"
 ```
 
-### 10. Confirmar al usuario
+### 11. Confirmar al usuario
 
 Informa de:
 - Qué skills y agents se descargaron
 - Qué MCP servers quedaron configurados
-- Si hay credenciales pendientes de rellenar en `.mcp.json`
-- Recordatorio: reiniciar Claude Code para que los MCP servers nuevos se activen
+- Resultado de cada init de bloque (éxito / fallo)
+- Recordatorio: reiniciar Claude Code para que los cambios surtan efecto
 
 ## Notas
 
 - NUNCA sobreescribas `.claude/settings.local.json` completo si ya existe — haz merge de `enabledMcpjsonServers`.
 - Si el usuario ya tiene servers en `.mcp.json`, respétalos y añade solo los nuevos.
-- Este skill cubre la inicialización base. Pasos adicionales de personalización de sesión se gestionan por separado.
+- Para añadir un nuevo init de bloque al template, añádelo a la lista del paso 9 y actualiza con `/sys--template-update`.

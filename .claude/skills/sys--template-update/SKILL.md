@@ -31,6 +31,9 @@ Solo se sincronizan estos skills (lista explícita). El usuario puede tener skil
 - `n8n--node-configuration`
 - `n8n--validation-expert`
 - `n8n--workflow-patterns`
+- `per--history`
+- `per--init`
+- `per--session-close`
 - `sys--context-report`
 - `sys--template-init`
 - `sys--template-sync`
