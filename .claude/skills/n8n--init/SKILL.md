@@ -59,6 +59,6 @@ Informa al usuario de:
 
 ## Notas
 
-- Los skills de n8n son de terceros — no se sincronizan al template via `sys--template-update`.
+- Los skills de n8n son de terceros — no se sincronizan al template via `sys--template-push`.
 - Para actualizar a la última versión, volver a ejecutar `/n8n--init` y confirmar la sobreescritura.
 - En Windows, `/tmp/` en Git Bash equivale a `C:\Users\<usuario>\AppData\Local\Temp\`.
