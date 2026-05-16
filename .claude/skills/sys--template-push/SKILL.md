@@ -27,8 +27,8 @@ Solo se sincronizan estos skills (lista explícita). El usuario puede tener skil
 - `n8n--init`
 - `per--history`
 - `per--init`
-- `per--learn`
 - `per--session-close`
+- `per--learn`
 - `sys--context-report`
 - `sys--template-init`
 - `sys--template-pull`

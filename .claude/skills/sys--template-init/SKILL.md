@@ -10,7 +10,7 @@ Usar cuando el usuario invoque `/sys--template-init` o pida inicializar/actualiz
 
 - **Repo template**: `https://github.com/dgarciahz/claude-starter`
 - **Remote name**: `template`
-- **Catálogo MCP**: `.claude/skills/sys--template-push/MCP_SERVERS.md` (se descarga junto con los skills)
+- **Catálogo MCP**: `.claude/skills/sys--template-update/MCP_SERVERS.md` (se descarga junto con los skills)
 
 ## Instrucciones
 
@@ -42,7 +42,7 @@ git checkout template/main -- .claude/agents/
 
 ### 4. Leer el catálogo de MCP servers y calcular el diff
 
-Lee el archivo `.claude/skills/sys--template-push/MCP_SERVERS.md` que acaba de descargarse.
+Lee el archivo `.claude/skills/sys--template-update/MCP_SERVERS.md` que acaba de descargarse.
 
 Si ya existe un `.mcp.json` en el proyecto, compara los servers del catálogo con los ya configurados. Separa:
 - **Servers nuevos**: están en el catálogo pero no en `.mcp.json` → candidatos a instalar
@@ -121,4 +121,4 @@ Informa de:
 
 - NUNCA sobreescribas `.claude/settings.local.json` completo si ya existe — haz merge de `enabledMcpjsonServers`.
 - Si el usuario ya tiene servers en `.mcp.json`, respétalos y añade solo los nuevos.
-- Para añadir un nuevo init de bloque al template, añádelo a la lista del paso 9 y actualiza con `/sys--template-push`.
+- Para añadir un nuevo init de bloque al template, añádelo a la lista del paso 9 y actualiza con `/sys--template-update`.
