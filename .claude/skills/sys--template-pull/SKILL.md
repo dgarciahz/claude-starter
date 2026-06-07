@@ -51,7 +51,7 @@ git checkout template/main -- .claude/assets/
 
 ### 5. Comparar MCP servers del catálogo con el proyecto
 
-Lee el archivo `.claude/skills/sys--template-push/MCP_SERVERS.md` recién descargado y compáralo con el `.mcp.json` del proyecto (si existe).
+Lee el archivo `.claude/assets/MCP_SERVERS.md` recién descargado y compáralo con el `.mcp.json` del proyecto (si existe).
 
 Si hay servers en el catálogo que **no están en el proyecto**, muéstralos al usuario:
 > "El catálogo del template tiene estos servers que no tienes configurados: [lista]. ¿Quieres añadir alguno?"

@@ -79,7 +79,7 @@ No copies agents que no estén en la lista — pueden ser agents específicos de
 
 ### 6. Actualizar MCP_SERVERS.md (catálogo del template)
 
-Lee el `.mcp.json` del proyecto actual y compáralo con el catálogo `.claude/skills/sys--template-push/MCP_SERVERS.md`.
+Lee el `.mcp.json` del proyecto actual y compáralo con el catálogo `.claude/assets/MCP_SERVERS.md`.
 
 Si hay servers en el proyecto que **no están en el catálogo**, pregunta al usuario:
 > "Estos servers están en tu proyecto pero no en el catálogo del template: [lista]. ¿Los añado?"
