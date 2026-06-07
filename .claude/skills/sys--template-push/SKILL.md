@@ -15,7 +15,7 @@ Usar cuando el usuario invoque `/sys--template-push` o pida sincronizar / propag
 
 Solo se sincronizan estos agents (lista explícita). El usuario puede tener agents propios en el proyecto que NO deben subirse al template:
 
-- `test-architect.md`
+_(ninguno por ahora)_
 
 Si el usuario pide añadir o quitar un agent de esta lista, actualiza el SKILL.md antes de continuar.
 
