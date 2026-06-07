@@ -95,7 +95,33 @@ Si no existe, añade:
 
 > Este paso modifica `~/.claude/settings.json` — configuración global del usuario, no del proyecto.
 
-### 7. Ejecutar inits de bloque
+### 7. Instalar output styles
+
+Copia todos los archivos de `.claude/output-styles/` al directorio global:
+
+```bash
+cp .claude/output-styles/*.md ~/.claude/output-styles/
+```
+
+Si `~/.claude/output-styles/` no existe, créalo antes:
+
+```bash
+mkdir -p ~/.claude/output-styles/
+```
+
+Después pregunta al usuario con `AskUserQuestion` qué output style quiere activar para este proyecto. Muestra los estilos disponibles listando los `.md` de `.claude/output-styles/` (nombre del frontmatter `name:`). Incluye siempre la opción "Ninguno".
+
+Para el estilo elegido (si no es "Ninguno"), escribe `outputStyle` en `.claude/settings.local.json`:
+
+```json
+{
+  "outputStyle": "<nombre del estilo>"
+}
+```
+
+Si el archivo ya existe, añade/actualiza solo esa clave — no sobreescribas el resto.
+
+### 8. Ejecutar inits de bloque
 
 Llama a cada skill de la siguiente lista en orden. Si alguno falla, informa al usuario pero continúa con el resto — un init fallido no debe bloquear los demás.
 
@@ -104,14 +130,14 @@ Llama a cada skill de la siguiente lista en orden. Si alguno falla, informa al u
 
 Para invocar cada uno, indícale al usuario que el skill se ejecutará automáticamente, y procede a seguir sus instrucciones como si el usuario lo hubiera invocado directamente.
 
-### 8. Commit de los cambios
+### 9. Commit de los cambios
 
 ```bash
 git add .claude/ .mcp.json
 git commit -m "Inicializa proyecto desde template claude-starter — <fecha>"
 ```
 
-### 9. Confirmar al usuario
+### 10. Confirmar al usuario
 
 Informa de:
 - Qué MCP servers quedaron configurados
@@ -123,4 +149,4 @@ Informa de:
 
 - NUNCA sobreescribas `.claude/settings.local.json` completo si ya existe — haz merge de `enabledMcpjsonServers`.
 - Si el usuario ya tiene servers en `.mcp.json`, respétalos y añade solo los nuevos.
-- Para añadir un nuevo init de bloque al template, añádelo a la lista del paso 7 y actualiza con `/sys--template-push`.
+- Para añadir un nuevo init de bloque al template, añádelo a la lista del paso 8 y actualiza con `/sys--template-push`.

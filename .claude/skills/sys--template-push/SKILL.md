@@ -71,6 +71,10 @@ No copies skills que no estén en la lista — pueden ser skills específicos de
 
 Copia todo el contenido de `.claude/init/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\init\`, sobreescribiendo los archivos existentes. Si el directorio destino no existe, créalo.
 
+### 4b. Sincronizar output styles
+
+Copia todo el contenido de `.claude/output-styles/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\output-styles\`, sobreescribiendo los archivos existentes. Si el directorio destino no existe, créalo.
+
 ### 5. Sincronizar agents
 
 Copia **solo los agents de la lista anterior** desde `.claude/agents/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\agents\`, sobreescribiendo los archivos existentes.
