@@ -79,7 +79,7 @@ Añade los servers elegidos a `enabledMcpjsonServers`. Si el archivo no existe, 
 Copia el script al directorio global de Claude Code:
 
 ```bash
-cp .claude/init/statusline-command.sh ~/.claude/statusline-command.sh
+cp .claude/assets/statusline-command.sh ~/.claude/statusline-command.sh
 ```
 
 Lee `~/.claude/settings.json` (créalo si no existe). Si ya contiene el bloque `statusLine`, no toques nada.
@@ -97,19 +97,14 @@ Si no existe, añade:
 
 ### 7. Instalar output styles
 
-Copia todos los archivos de `.claude/output-styles/` al directorio global:
-
-```bash
-cp .claude/output-styles/*.md ~/.claude/output-styles/
-```
-
-Si `~/.claude/output-styles/` no existe, créalo antes:
+Copia los output styles de `.claude/assets/` al directorio global. Los output styles son los `.md` que tienen frontmatter con `name:` en `.claude/assets/`.
 
 ```bash
 mkdir -p ~/.claude/output-styles/
+cp .claude/assets/caveman.md ~/.claude/output-styles/caveman.md
 ```
 
-Después pregunta al usuario con `AskUserQuestion` qué output style quiere activar para este proyecto. Muestra los estilos disponibles listando los `.md` de `.claude/output-styles/` (nombre del frontmatter `name:`). Incluye siempre la opción "Ninguno".
+Después pregunta al usuario con `AskUserQuestion` qué output style quiere activar para este proyecto. Muestra los estilos disponibles leyendo el frontmatter `name:` de los `.md` de `.claude/assets/`. Incluye siempre la opción "Ninguno".
 
 Para el estilo elegido (si no es "Ninguno"), escribe `outputStyle` en `.claude/settings.local.json`:
 
