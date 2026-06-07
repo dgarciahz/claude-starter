@@ -97,3 +97,9 @@ Custom `/` commands for n8n tasks: code-javascript, code-python, expression-synt
 - Always ask the user to confirm before **deleting** or **overwriting** a workflow
 - When in doubt about a requirement, ask — don't assume
 - After any create or update, offer to run a test execution to validate
+
+<!-- PERSONALIZATION:START — no eliminar este bloque -->
+@C:\david\development\claude\claude-personalization\soul.md
+@C:\david\development\claude\claude-personalization\user.md
+@C:\david\development\claude\claude-personalization\learnings.md
+<!-- PERSONALIZATION:END -->
