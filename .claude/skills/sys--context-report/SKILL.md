@@ -39,7 +39,7 @@ Genera el archivo `project-tools.html` en el directorio de trabajo actual con es
 
 #### Estructura general
 - Tema oscuro (fondo #0f1117, estilo GitHub dark)
-- Título: nombre del directorio de trabajo actual + " — Claude Code"
+- Título: "Proyecto n8n — Claude Code"
 - Subtítulo: "MCP Servers y Skills asociados a este proyecto"
 - Dos secciones colapsables: "MCP Servers" y "Skills"
 

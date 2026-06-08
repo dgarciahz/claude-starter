@@ -8,7 +8,7 @@ Usar cuando el usuario invoque `/sys--template-init` o pida inicializar el proye
 
 ## Configuración
 
-- **Catálogo MCP**: `.claude/assets/MCP_SERVERS.md`
+- **Catálogo MCP**: `.claude/skills/sys--template-push/MCP_SERVERS.md`
 
 ## Prerequisito
 
@@ -24,7 +24,7 @@ Sigue estos pasos en orden:
 
 ### 1. Leer el catálogo de MCP servers y calcular el diff
 
-Lee `.claude/assets/MCP_SERVERS.md`.
+Lee `.claude/skills/sys--template-push/MCP_SERVERS.md`.
 
 Si ya existe un `.mcp.json` en el proyecto, compara los servers del catálogo con los ya configurados. Separa:
 - **Servers nuevos**: están en el catálogo pero no en `.mcp.json` → candidatos a instalar
