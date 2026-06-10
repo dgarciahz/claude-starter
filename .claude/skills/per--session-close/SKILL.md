@@ -56,16 +56,19 @@ Comprueba cuántos archivos del día ya existen en `history/` para asignar el si
 
 Guarda el resumen en `$CLAUDE_PERSONAL_DIR/history/session-YYYY-MM-DD-NNN.md`.
 
-### 6. Mantener límite de 15 sesiones
+### 6. Mantener ventana de 15 días trabajados
 
-Cuenta los archivos en `history/`. Si hay más de 15, elimina el más antiguo (el de fecha más temprana).
+1. Extrae las fechas únicas de los archivos en `history/` (formato `session-YYYY-MM-DD-NNN.md`).
+2. Ordénalas de más reciente a más antigua.
+3. Toma las 15 fechas más recientes.
+4. Elimina todos los archivos cuya fecha NO esté en ese conjunto de 15 fechas.
 
 ### 7. Confirmar
 
 Informa al usuario de:
 - Nombre del archivo guardado
 - Cuántas sesiones hay ahora en el historial
-- Si se eliminó alguna sesión antigua
+- Cuántas sesiones antiguas se eliminaron (si las hay)
 
 ## Notas
 

@@ -18,23 +18,6 @@ Si el usuario pasó texto como argumento al invocar el skill (ej. `/per--learn n
 
 Si no hay argumento, pregunta al usuario qué aprendizaje quiere guardar.
 
-### 2b. Determinar destino
-
-Lee `$CLAUDE_PERSONAL_DIR/learnings/_index.md`. Si el fichero no existe aún (sistema sin migrar), el destino es `learnings.md` directamente — omite este paso.
-
-Pregunta al usuario: "¿Es un learning transversal (va a `learnings.md`) o específico de una temática?"
-
-- **Transversal** → destino = `learnings.md`. Continúa al paso 3.
-- **Temático** → muestra la tabla del índice y pregunta qué fichero usar. El usuario elige uno existente o escribe un nombre nuevo.
-  - Si es un fichero nuevo:
-    1. Pide al usuario: temas que cubre y en qué contexto cargarlo (una línea cada uno).
-    2. Crea `$CLAUDE_PERSONAL_DIR/learnings/<nombre>.md` con cabecera mínima:
-       ```markdown
-       # Learnings — <Nombre del tema>
-       ```
-    3. Añade una fila en la tabla de `_index.md` con Fichero, Temas y Cuándo cargar.
-  - Destino = `$CLAUDE_PERSONAL_DIR/learnings/<nombre>.md`
-
 ### 3. Estructurar el aprendizaje
 
 Para cada aprendizaje, obtén o infiere los tres campos del formato de `learnings.md`:

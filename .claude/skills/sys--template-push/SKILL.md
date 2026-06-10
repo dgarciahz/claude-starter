@@ -8,8 +8,8 @@ Usar cuando el usuario invoque `/sys--template-push` o pida sincronizar / propag
 
 ## Configuración
 
-- **Ruta local del template**: `C:\david\development\claude-templates\claude-starter`
-- **Repo remoto**: `https://github.com/dgarciahz/claude-starter`
+- **Repo remoto del template**: `https://github.com/dgarciahz/claude-starter`
+- **Remote name**: `template`
 
 ## Agents incluidos en el template
 
@@ -57,54 +57,83 @@ git commit -m "Prepara skills/agents para sincronización con template — <fech
 
 Si hay cambios en otros archivos fuera de `.claude/`, infórmaselo al usuario pero no los incluyas en el commit — son responsabilidad suya.
 
-### 2. Verificar que el clone del template existe
+### 2. Detectar el modo de operación
 
-Comprueba que existe `C:\david\development\claude-templates\claude-starter\.git`. Si no existe, informa al usuario y detente — hay que clonar el repo primero.
+Ejecuta:
+```bash
+git remote get-url origin
+```
+
+- Si la URL contiene `dgarciahz/claude-starter` → **modo directo**: estás en el template. Los pasos siguientes operan sobre el directorio actual. No hay que copiar nada.
+- Si la URL es otra cosa → **modo remoto**: estás en un proyecto derivado. Necesitas un worktree temporal del template para copiar archivos.
+
+#### Modo remoto: preparar worktree del template
+
+Verifica o añade el remote `template`:
+```bash
+git remote get-url template 2>/dev/null || git remote add template https://github.com/dgarciahz/claude-starter
+git fetch template
+```
+
+Crea un worktree temporal en una carpeta fuera del proyecto (e.g. `/tmp/claude-starter-push` o `%TEMP%\claude-starter-push`):
+```bash
+git worktree add <ruta-temporal> template/main
+```
+
+Todos los pasos 3–6 en modo remoto copian archivos a `<ruta-temporal>` en lugar de al directorio actual.
 
 ### 3. Sincronizar skills
 
-Copia **solo los skills de la lista anterior** desde `.claude/skills/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\skills\`, sobreescribiendo los archivos existentes.
+Copia **solo los skills de la lista anterior** desde `.claude/skills/` del proyecto actual al directorio de destino (actual en modo directo, `<ruta-temporal>` en modo remoto), sobreescribiendo los existentes.
 
 No copies skills que no estén en la lista — pueden ser skills específicos del proyecto activo.
 
 ### 4. Sincronizar assets
 
-Copia todo el contenido de `.claude/assets/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\assets\`, sobreescribiendo los archivos existentes. Si el directorio destino no existe, créalo.
+Copia todo el contenido de `.claude/assets/` al directorio de destino, sobreescribiendo los existentes.
 
 ### 5. Sincronizar agents
 
-Copia **solo los agents de la lista anterior** desde `.claude/agents/` del proyecto actual a `C:\david\development\claude-templates\claude-starter\.claude\agents\`, sobreescribiendo los archivos existentes.
+Copia **solo los agents de la lista anterior** desde `.claude/agents/` al directorio de destino, sobreescribiendo los existentes.
 
-No copies agents que no estén en la lista — pueden ser agents específicos del proyecto activo.
+No copies agents que no estén en la lista.
 
 ### 6. Actualizar MCP_SERVERS.md (catálogo del template)
 
-Lee el `.mcp.json` del proyecto actual y compáralo con el catálogo `.claude/skills/sys--template-push/MCP_SERVERS.md`.
+Lee el `.mcp.json` del proyecto actual y compáralo con `.claude/assets/MCP_SERVERS.md` del directorio de destino.
 
 Si hay servers en el proyecto que **no están en el catálogo**, pregunta al usuario:
 > "Estos servers están en tu proyecto pero no en el catálogo del template: [lista]. ¿Los añado?"
 
-Para cada server que el usuario apruebe, añade una entrada al `MCP_SERVERS.md` con:
+Para cada server aprobado, añade una entrada al `MCP_SERVERS.md` con:
 - Nombre del server
 - Paquete npx
 - Variables necesarias (sin valores reales — solo los nombres)
 - Descripción de uso
 
-Una vez actualizado el `MCP_SERVERS.md`, cópialo al template:
-`C:\david\development\claude-templates\claude-starter\.claude\skills\sys--template-push\MCP_SERVERS.md`
-
 No copies `.mcp.json` ni `settings.local.json` — contienen rutas absolutas y credenciales específicas de cada máquina.
 
 ### 7. Sincronizar CLAUDE.md (opcional)
 
-Si el usuario indicó explícitamente que quiere actualizar también el `CLAUDE.md`, cópialo. Si no lo mencionó, pregunta antes de hacerlo — el CLAUDE.md suele tener contenido específico del proyecto activo.
+Si el usuario indicó explícitamente que quiere actualizar también el `CLAUDE.md`, cópialo. Si no lo mencionó, pregunta antes — el CLAUDE.md suele tener contenido específico del proyecto activo.
 
-### 8. Hacer commit y push en el template
+### 8. Commit y push
 
-Desde `C:\david\development\claude-templates\claude-starter`:
-- `git add .`
-- `git commit -m "Sincroniza skills/agents desde [nombre del proyecto actual] — [fecha]"`
-- `git push`
+**Modo directo** (en el template):
+```bash
+git add .claude/
+git commit -m "Sincroniza skills/agents — <fecha>"
+git push
+```
+
+**Modo remoto** (desde el worktree temporal):
+```bash
+cd <ruta-temporal>
+git add .claude/
+git commit -m "Sincroniza skills/agents desde [nombre del proyecto actual] — <fecha>"
+git push
+git worktree remove <ruta-temporal>
+```
 
 ### 9. Confirmar
 

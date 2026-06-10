@@ -33,8 +33,6 @@ Comprueba si existen estos archivos. **Nunca sobreescribas si ya existen.**
 - `$CLAUDE_PERSONAL_DIR/soul.md`
 - `$CLAUDE_PERSONAL_DIR/user.md`
 - `$CLAUDE_PERSONAL_DIR/learnings.md`
-- `$CLAUDE_PERSONAL_DIR/learnings/` (directorio)
-- `$CLAUDE_PERSONAL_DIR/learnings/_index.md`
 - `$CLAUDE_PERSONAL_DIR/history/` (directorio)
 
 Si alguno no existe, créalo con el contenido mínimo de plantilla:
@@ -42,21 +40,6 @@ Si alguno no existe, créalo con el contenido mínimo de plantilla:
 **soul.md**: secciones Identidad, Principios éticos, Estilo de razonamiento — con texto placeholder.
 **user.md**: secciones Idioma, Formato, Estilo de respuesta — con texto placeholder.
 **learnings.md**: cabecera explicativa + vacío.
-**learnings/**: directorio vacío.
-**learnings/_index.md**:
-
-```markdown
-# Learnings — Índice de Ficheros Temáticos
-
-Catálogo de ficheros de aprendizaje por temática. Actualizar al crear un nuevo fichero en `learnings/`.
-
-| Fichero | Temas | Cuándo cargar |
-|---------|-------|---------------|
-| (vacío — añadir entradas con /per--learn) | | |
-
-**Instrucción de carga automática**: Cuando detectes que la sesión trata alguno de los temas de la tabla, usa la herramienta `Read` para cargar ese fichero antes de responder por primera vez. Informa al usuario: "He cargado learnings/<fichero>.md para esta sesión."
-```
-
 **history/**: directorio vacío.
 
 ### 3. Añadir o actualizar bloque PERSONALIZATION en el CLAUDE.md del proyecto
@@ -72,7 +55,6 @@ Si no existe el bloque, añade al final del archivo:
 @<CLAUDE_PERSONAL_DIR>/soul.md
 @<CLAUDE_PERSONAL_DIR>/user.md
 @<CLAUDE_PERSONAL_DIR>/learnings.md
-@<CLAUDE_PERSONAL_DIR>/learnings/_index.md
 <!-- PERSONALIZATION:END -->
 ```
 
