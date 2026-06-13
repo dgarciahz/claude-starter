@@ -8,20 +8,26 @@ Usar cuando el usuario invoque `/gh--push` o pida hacer commit y push a GitHub. 
 
 ## Instrucciones
 
-### 1. Generar mensaje de commit
+### 1. Analizar el estado del repositorio
 
-Si el usuario no proporcionó un mensaje, ejecuta:
+Ejecuta:
 ```bash
 git --no-pager diff
 ```
-Analiza el output y genera un mensaje descriptivo en español (máximo 72 caracteres, tiempo presente, sin punto final).
 
-Si no hay diff, informa al usuario y termina.
+- Si hay diff (cambios sin commitear): genera un mensaje descriptivo en español (máximo 72 caracteres, tiempo presente, sin punto final). Pasa al paso 2 con ese mensaje.
+- Si no hay diff: no generes mensaje. Pasa al paso 2 igualmente sin argumento — el script detectará si hay commits pendientes de push y los pusheará.
 
 ### 2. Ejecutar el script
 
+Con mensaje (cuando hay diff):
 ```bash
-bash .claude/skills/github-push/github_push.sh "MENSAJE"
+bash .claude/skills/gh--push/github_push.sh "MENSAJE"
+```
+
+Sin mensaje (cuando no hay diff):
+```bash
+bash .claude/skills/gh--push/github_push.sh
 ```
 
 ### 3. Mostrar el output del script al usuario.
