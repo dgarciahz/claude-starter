@@ -1,6 +1,6 @@
 # Skill: Template Pull
 
-Actualiza los skills y agents del proyecto actual desde el template `claude-starter`, sin tocar la configuración local (`.mcp.json`, `settings.local.json`).
+Actualiza los skills y el framework starter del proyecto actual desde el template `claude-starter`, sin tocar la configuración local (`.mcp.json`, `settings.local.json`, `CLAUDE.md`).
 
 ## Trigger
 
@@ -23,6 +23,7 @@ git remote get-url template
 Si no existe, añádelo:
 ```bash
 git remote add template https://github.com/dgarciahz/claude-starter
+git fetch template
 ```
 
 ### 2. Fetch del template
@@ -36,28 +37,34 @@ git fetch template
 Muestra al usuario un diff resumido de lo que va a cambiar:
 
 ```bash
-git diff HEAD template/main -- .claude/skills/ .claude/agents/ .claude/assets/
+git diff HEAD template/main -- .claude/skills/ .claude/agents/ starter/
 ```
 
 Si no hay diferencias, informa al usuario y detente — el proyecto ya está al día.
 
-### 4. Bajar skills, agents y assets
+### 4. Bajar skills, agents y el framework starter
 
 ```bash
 git checkout template/main -- .claude/skills/
 git checkout template/main -- .claude/agents/
-git checkout template/main -- .claude/assets/
+git checkout template/main -- starter/
 ```
 
-### 5. Comparar MCP servers del catálogo con el proyecto
+Esto descarga:
+- Los skills actualizados
+- El directorio `starter/` completo: INIT.md actualizado, README.md y assets (config.yaml, caveman.md, statusline-command.sh)
 
-Lee el archivo `.claude/assets/MCP_SERVERS.md` recién descargado y compáralo con el `.mcp.json` del proyecto (si existe).
+No descarga ni modifica `.mcp.json`, `settings.local.json`, ni `CLAUDE.md`.
 
-Si hay servers en el catálogo que **no están en el proyecto**, muéstralos al usuario:
-> "El catálogo del template tiene estos servers que no tienes configurados: [lista]. ¿Quieres añadir alguno?"
+### 5. Comparar config del template con el proyecto
+
+Lee `starter/assets/config.yaml` recién descargado y compáralo con `.mcp.json` del proyecto (si existe).
+
+Si hay servers en el config que **no están en el proyecto**, muéstralos al usuario:
+> "El config del template tiene estos servers que no tienes configurados: [lista]. ¿Quieres añadir alguno?"
 
 Usa `AskUserQuestion` con multiSelect para que el usuario elija. Para los elegidos:
-- Pide las credenciales necesarias
+- Pide las credenciales necesarias (si aplica)
 - Detecta la ruta de `npx` según el SO (Windows: `C:\Program Files\nodejs\npx.cmd`, Unix: `npx`)
 - Actualiza `.mcp.json` y `enabledMcpjsonServers` en `.claude/settings.local.json`
 
@@ -66,20 +73,28 @@ Si no hay diff de MCP servers (o el usuario no quiere ninguno), continúa sin to
 ### 6. Commit de los cambios
 
 ```bash
-git add .claude/skills/ .claude/agents/ .claude/assets/ .mcp.json
-git commit -m "Sincroniza skills/agents/assets desde template claude-starter — <fecha>"
+git add .claude/skills/ .claude/agents/ starter/
+git commit -m "Sincroniza skills/framework desde template claude-starter — <fecha>"
+```
+
+Si se añadieron MCP servers en el paso 5:
+```bash
+git add .mcp.json .claude/settings.local.json
+git commit -m "Añade MCP servers desde template — <fecha>"
 ```
 
 ### 7. Confirmar al usuario
 
 Informa de:
 - Qué skills/agents fueron actualizados
-- Si hay skills nuevos que no existían antes en el proyecto
+- Si se actualizó `starter/` (INIT.md, assets)
 - Qué MCP servers se añadieron (si los hay)
+- Recordatorio: "Puedes re-ejecutar `starter/INIT.md` para aplicar cambios del framework (idempotente)"
 - Recordatorio: reiniciar Claude Code si se añadieron MCP servers nuevos
 
 ## Notas
 
 - NUNCA sobreescribas `.mcp.json` completo si ya existe — solo añade los servers nuevos elegidos.
 - NUNCA sobreescribas `.claude/settings.local.json` completo — haz merge de `enabledMcpjsonServers`.
+- NUNCA toques `CLAUDE.md` — es propio del proyecto.
 - Este skill es idempotente: ejecutarlo varias veces no causa daño.

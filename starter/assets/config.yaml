@@ -1,0 +1,30 @@
+version: "1.0"
+
+mcp_servers:
+  playwright:
+    package: "@playwright/mcp@latest"
+    description: "Automatización de navegador, scraping, testing, capturas"
+  context7:
+    package: "@upstash/context7-mcp@latest"
+    description: "Documentación actualizada de librerías en contexto de Claude"
+
+permissions:
+  - "Bash(git remote *)"
+  - "Bash(git fetch *)"
+  - "Bash(git add *)"
+  - "Bash(git commit *)"
+  - "Bash(git push *)"
+  - "Bash(git checkout *)"
+  - "Bash(git worktree *)"
+  - "Bash(git rm *)"
+  - "Bash(git *)"
+  - "Bash(mkdir -p ~/.claude/*)"
+  - "Bash(bash ~/.claude/statusline-command.sh)"
+
+env:
+  CLAUDE_PERSONAL_DIR: ""   # INIT.md pregunta al usuario si está vacío
+
+output_styles:
+  - file: "caveman.md"
+    name: "Caveman"
+    description: "Respuestas directas, sin relleno, sin emojis"
