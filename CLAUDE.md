@@ -10,4 +10,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 @C:\david\development\claude\claude-personalization\soul.md
 @C:\david\development\claude\claude-personalization\user.md
 @C:\david\development\claude\claude-personalization\learnings.md
+@C:\david\development\claude\claude-personalization\learnings\_index.md
 <!-- PERSONALIZATION:END -->
