@@ -9,14 +9,6 @@ mcp_servers:
     description: "Documentación actualizada de librerías en contexto de Claude"
 
 permissions:
-  - "Bash(git remote *)"
-  - "Bash(git fetch *)"
-  - "Bash(git add *)"
-  - "Bash(git commit *)"
-  - "Bash(git push *)"
-  - "Bash(git checkout *)"
-  - "Bash(git worktree *)"
-  - "Bash(git rm *)"
   - "Bash(git *)"
   - "Bash(mkdir -p ~/.claude/*)"
   - "Bash(bash ~/.claude/statusline-command.sh)"

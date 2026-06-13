@@ -23,15 +23,21 @@ Anota el valor de `version` para usarlo en el bloque STARTER del CLAUDE.md.
 
 ### Paso 2 — Actualizar .gitignore
 
+Detecta si estás en el template o en un proyecto derivado:
+
+```bash
+git remote get-url origin
+```
+
+- Si la URL contiene `dgarciahz/claude-starter` → **modo template**: el `.gitignore` ya está correcto. Solo asegúrate de que `.claude/settings.local.json` está presente; no toques las entradas de `CLAUDE.md` ni `.mcp.json`.
+- Cualquier otra URL (o sin remote) → **modo derivado**: sigue los pasos a continuación.
+
+**En modo derivado:**
+
 Busca `.gitignore` en la raíz del proyecto. Si no existe, créalo.
 
-Añade las siguientes líneas **solo si no están ya presentes** (comprueba línea por línea antes de añadir):
-
-```
-.claude/settings.local.json
-CLAUDE.md
-.mcp.json
-```
+1. **Elimina** las líneas `CLAUDE.md` y `.mcp.json` del `.gitignore` **si están presentes** — en proyectos derivados estos ficheros deben quedar trackeados en git.
+2. **Añade** `.claude/settings.local.json` **solo si no está ya presente**.
 
 ### Paso 3 — Crear o actualizar CLAUDE.md
 
@@ -203,10 +209,14 @@ Contenido del bloque (sustituye `<CLAUDE_PERSONAL_DIR>` por la ruta real; en Win
 
 ### Paso 9 — Commit
 
+**Modo derivado**: `CLAUDE.md` y `.mcp.json` ya están des-gitignoreados por el paso 2, así que pueden añadirse normalmente.
+
 ```bash
 git add .mcp.json CLAUDE.md .gitignore .claude/settings.local.json
 git commit -m "Inicializa proyecto desde starter framework — <fecha>"
 ```
+
+**Modo template**: `CLAUDE.md` y `.mcp.json` siguen gitignoreados — no los incluyas en `git add`. Solo commitea `.gitignore` y `.claude/settings.local.json` si cambiaron.
 
 Si algún fichero no existe (ej. `.mcp.json` si no se configuró ningún MCP server), omítelo del `git add`.
 
