@@ -23,6 +23,7 @@ Si el usuario pide añadir o quitar un agent de esta lista, actualiza el SKILL.m
 
 Solo se sincronizan estos skills (lista explícita). El usuario puede tener skills propios en el proyecto que NO deben subirse al template:
 
+- `gh--pull`
 - `gh--push`
 - `per--handoff`
 - `per--history`
