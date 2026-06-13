@@ -12,6 +12,9 @@ permissions:
   - "Bash(git *)"
   - "Bash(mkdir -p ~/.claude/*)"
   - "Bash(bash ~/.claude/statusline-command.sh)"
+  - "Bash(cp starter/assets/caveman.md ~/.claude/output-styles/caveman.md)"
+  - "PowerShell($env:CLAUDE_PERSONAL_DIR)"
+  - "PowerShell(Test-Path *)"
 
 env:
   CLAUDE_PERSONAL_DIR: ""   # INIT.md pregunta al usuario si está vacío
