@@ -30,6 +30,7 @@ starter/
 
 | Skill | Descripción |
 |-------|-------------|
+| `/gh--pull` | Pull desde GitHub |
 | `/gh--push` | Commit y push a GitHub con mensaje automático |
 | `/per--handoff` | Prepara handoff de sesión al contexto siguiente |
 | `/per--history` | Gestiona historial de sesiones |

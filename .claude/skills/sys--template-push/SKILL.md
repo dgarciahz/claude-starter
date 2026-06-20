@@ -114,6 +114,27 @@ Si se realizaron cambios al config.yaml, cópialos al directorio de destino.
 
 No copies `.mcp.json`, `settings.local.json`, ni `CLAUDE.md` — son propios de cada proyecto.
 
+### 5b. Actualizar starter/README.md
+
+Comprueba si `starter/README.md` ya tiene cambios pendientes (el usuario lo modificó manualmente):
+
+```bash
+git diff --name-only HEAD -- starter/README.md
+```
+
+Si aparece en el diff → salta este paso.
+
+Si no aparece:
+
+1. Toma la lista de skills sincronizados en el Paso 3.
+2. Lee `starter/README.md` y extrae las filas de la tabla de skills.
+3. Para cada skill de la lista: lee la primera línea descriptiva de su `SKILL.md` (la que sigue al encabezado `#`). Compárala con la descripción en la tabla.
+   - Skill nuevo (no tiene fila): añade una fila.
+   - Skill con descripción distinta: actualiza la fila.
+4. Para cada fila en la tabla cuyo skill ya no esté en la lista: elimina la fila.
+5. Si hubo cambios: actualiza `starter/README.md` e informa al usuario qué filas se añadieron, eliminaron o modificaron. El archivo se incluirá en el commit del Paso 6 porque `starter/` ya está en el `git add`.
+6. Si no hubo cambios: informa "starter/README.md no requiere cambios."
+
 ### 6. Commit y push
 
 **Modo directo** (en el template):
@@ -128,6 +149,28 @@ git push
 cd <ruta-temporal>
 git add .claude/ starter/
 git commit -m "Sincroniza skills/assets desde [nombre del proyecto actual] — <fecha>"
+git push
+```
+
+### 6b. Actualizar starter/config/version
+
+Tras el push del Paso 6, obtén el hash del commit recién subido y actualiza el fichero de versión:
+
+**Modo directo:**
+```bash
+HASH=$(git rev-parse HEAD)
+echo $HASH > starter/config/version
+git add starter/config/version
+git commit -m "chore: actualiza versión del starter — $HASH"
+git push
+```
+
+**Modo remoto** (desde el worktree temporal):
+```bash
+HASH=$(git rev-parse HEAD)
+echo $HASH > starter/config/version
+git add starter/config/version
+git commit -m "chore: actualiza versión del starter — $HASH"
 git push
 git worktree remove <ruta-temporal>
 ```

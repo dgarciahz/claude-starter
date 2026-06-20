@@ -101,6 +101,27 @@ Lee `.claude/settings.local.json` (si no existe, tratar como `{}`).
 
 Escribe `.claude/settings.local.json` actualizado. Si el fichero ya existía, haz merge — no sobrescribas completo.
 
+**5.4 — Hook de versión**: lee `.claude/settings.json` (si no existe, tratar como `{}`). Comprueba si ya hay una entrada en `hooks.UserPromptSubmit` con el comando `bash starter/assets/version-check.sh`. Si no existe, añade:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash starter/assets/version-check.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Haz merge con el contenido existente preservando otras claves. Escribe `.claude/settings.json`.
+
 ### Paso 6 — Configurar statusline
 
 **6.1 — Copiar script**: copia `starter/assets/statusline-command.sh` a `~/.claude/statusline-command.sh`. Copia siempre (permite actualizar el script en futuros re-inits).
@@ -212,7 +233,7 @@ Contenido del bloque (sustituye `<CLAUDE_PERSONAL_DIR>` por la ruta real; en Win
 **Modo derivado**: `CLAUDE.md` y `.mcp.json` ya están des-gitignoreados por el paso 2, así que pueden añadirse normalmente.
 
 ```bash
-git add .mcp.json CLAUDE.md .gitignore .claude/settings.local.json
+git add .mcp.json CLAUDE.md .gitignore .claude/settings.local.json .claude/settings.json
 git commit -m "Inicializa proyecto desde starter framework — <fecha>"
 ```
 
