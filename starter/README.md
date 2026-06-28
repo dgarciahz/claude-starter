@@ -20,11 +20,25 @@ INIT.md es idempotente — puede ejecutarse múltiples veces sin duplicar config
 starter/
 ├── INIT.md               ← instalador autocontenido e idempotente
 ├── README.md             ← este fichero
-└── assets/
-    ├── config.yaml       ← configuración declarativa (MCP servers, permisos, output styles)
-    ├── caveman.md        ← output style minimalista
-    ├── statusline-command.sh  ← script de statusline para Claude Code
-    └── version-check.sh  ← comprueba versión del template al arranque
+├── assets/
+│   ├── config.yaml       ← configuración declarativa (MCP servers, permisos, output styles)
+│   ├── caveman.md        ← output style minimalista
+│   ├── statusline-command.sh  ← script de statusline para Claude Code
+│   └── version-check.sh  ← comprueba versión del template al arranque
+└── skills/               ← pseudo-skills (invocación explícita por ruta)
+    ├── per--handoff.md   ← crea/recupera documentos de handoff entre sesiones
+    ├── per--stack.md     ← gestión de IT Stack Docs
+    └── sys--context-report.md ← regenera project-tools.html con MCP servers y skills
+```
+
+## Pseudo-skills (invocación por ruta explícita)
+
+Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la ruta al fichero:
+
+```
+"ejecuta starter/skills/per--handoff.md"
+"ejecuta starter/skills/sys--context-report.md"
+"ejecuta starter/skills/per--stack.md"
 ```
 
 ## Skills disponibles (tras inicializar)
@@ -64,5 +78,6 @@ El sistema de personalización persiste en `$CLAUDE_PERSONAL_DIR/` (fuera del re
 - `soul.md` — identidad y principios de Claude
 - `user.md` — preferencias del usuario
 - `learnings.md` — observaciones acumuladas
-- `learnings/` — ficheros temáticos de aprendizajes
+- `learnings/` — ficheros temáticos de aprendizajes (gestionados con `/per--learn`)
+- `IT_stacks/` — recetas de setup por plataforma (gestionados con `per--stack`)
 - `history/` — historial de sesiones

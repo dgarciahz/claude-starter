@@ -4,7 +4,7 @@ Regenera la página `project-tools.html` del proyecto con información actualiza
 
 ## Trigger
 
-Usar cuando el usuario invoque `/sys--context-report` o pida actualizar/regenerar la página de herramientas del proyecto.
+Usar cuando el usuario invoque este fichero explícitamente (ej. `starter/skills/sys--context-report.md`) o pida actualizar/regenerar la página de herramientas del proyecto.
 
 ## Instrucciones
 
@@ -27,6 +27,11 @@ Sigue estos pasos en orden:
 - Obtén los tokens de cada skill desde tu contexto de sistema.
 - Registra el **origen** de cada skill (`usuario` o `proyecto`) para mostrarlo en el HTML.
 - Si el mismo nombre de skill existe en ambos niveles, muéstralos como entradas separadas indicando su origen.
+
+#### Pseudo-skills
+- Lee `starter/skills/` del directorio de trabajo actual.
+- Para cada fichero `.md`, extrae el nombre y primera línea descriptiva.
+- Muéstralos en el HTML como sección separada o con badge `pseudo-skill`.
 
 #### Categorías
 - Busca `_categories.json` primero en `.claude/skills/` del proyecto; si no existe, usa `~/.claude/skills/_categories.json` como fallback.

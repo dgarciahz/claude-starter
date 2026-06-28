@@ -4,7 +4,7 @@ Crea o recupera un documento de handoff para retomar el trabajo en una sesión f
 
 ## Trigger
 
-Usar cuando el usuario invoque `/per--handoff`.
+Usar cuando el usuario invoque este fichero explícitamente (ej. `starter/skills/per--handoff.md`) o pida crear/recuperar un handoff.
 
 ## Directorio de handoffs
 
@@ -62,8 +62,8 @@ Si no existe, créalo antes de guardar. Si `CLAUDE_PERSONAL_DIR` no está defini
 - `ruta/al/archivo.ext` — descripción breve
 
 ## Skills sugeridos para la siguiente sesión
-- `/per--handoff <nombre-fichero>` — cargar este handoff
-- [otros skills relevantes según el trabajo pendiente]
+- `starter/skills/per--handoff.md <nombre-fichero>` — cargar este handoff
+- [otros pseudo-skills o skills relevantes según el trabajo pendiente]
 ```
 
 ### 2. No duplicar contenido existente

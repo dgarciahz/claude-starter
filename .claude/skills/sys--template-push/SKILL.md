@@ -20,17 +20,24 @@ _(ninguno por ahora)_
 
 Si el usuario pide añadir o quitar un agent de esta lista, actualiza el SKILL.md antes de continuar.
 
+## Pseudo-skills incluidos en el template
+
+Los ficheros en `starter/skills/` son pseudo-skills del framework: no están registrados en `.claude/skills/` y no necesitan lista explícita. Se sincronizan automáticamente como parte de `starter/` en los pasos de push (`git add starter/`) y pull (`git checkout template/main -- starter/`).
+
+Pseudo-skills actuales:
+- `starter/skills/per--handoff.md` — crea/recupera documentos de handoff entre sesiones
+- `starter/skills/per--stack.md` — gestión de IT Stack Docs
+- `starter/skills/sys--context-report.md` — regenera `project-tools.html` con MCP servers y skills
+
 ## Skills incluidos en el template
 
 Solo se sincronizan estos skills (lista explícita). El usuario puede tener skills propios en el proyecto que NO deben subirse al template:
 
 - `gh--pull`
 - `gh--push`
-- `per--handoff`
 - `per--history`
 - `per--session-close`
 - `per--learn`
-- `sys--context-report`
 - `sys--template-pull`
 - `sys--template-push`
 

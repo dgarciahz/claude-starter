@@ -120,6 +120,31 @@ Escribe `.claude/settings.local.json` actualizado. Si el fichero ya existía, ha
 
 Haz merge con el contenido existente preservando todas las demás claves y entradas de hooks. Escribe `.claude/settings.json`.
 
+**5.5 — Hook de operaciones destructivas**: lee `safety.destructive_op_guard` de `config.yaml`.
+
+- Si es `null` / no definido: pregunta al usuario con `AskUserQuestion`:
+  > "¿Activar el guardia de operaciones destructivas? Intercepta rm, git reset --hard, git push --force, truncate y sobreescritura con > — bloquea y pide confirmación antes de ejecutar."
+  
+  Opciones: "Sí" / "No". Escribe el resultado (`true` / `false`) en `config.yaml#safety.destructive_op_guard` antes de continuar.
+
+- Si es `true`: comprueba si en `hooks.PreToolUse` de `.claude/settings.json` ya existe alguna entrada con `"command": "bash starter/assets/destructive-check.sh"`. Si no existe, **añade** (append) al array `hooks.PreToolUse`:
+
+```json
+{
+  "matcher": "Bash",
+  "hooks": [
+    {
+      "type": "command",
+      "command": "bash starter/assets/destructive-check.sh"
+    }
+  ]
+}
+```
+
+- Si es `false`: comprueba si el hook está instalado en `hooks.PreToolUse`. Si está, **elimínalo**. Si no está, no hagas nada.
+
+Haz merge preservando todas las demás claves y entradas de hooks. Escribe `.claude/settings.json`.
+
 ### Paso 6 — Configurar statusline
 
 **6.1 — Copiar script**: copia `starter/assets/statusline-command.sh` a `~/.claude/statusline-command.sh`. Copia siempre (permite actualizar el script en futuros re-inits).
@@ -211,6 +236,23 @@ Catálogo de ficheros de aprendizaje por temática. Actualizar al crear un nuevo
 
 Para crear los directorios `learnings/` y `history/` si no existen, escribe un fichero `.gitkeep` vacío dentro de cada uno (esto crea el directorio automáticamente).
 
+- `$CLAUDE_PERSONAL_DIR/IT_stacks/_index_stacks.md`:
+
+```markdown
+# IT Stacks — Índice de Ficheros
+
+Catálogo de stack docs por plataforma/entorno. Actualizar al crear un nuevo fichero en `IT_stacks/`.
+
+| Fichero | Plataformas / herramientas | Cuándo cargar |
+|---------|---------------------------|---------------|
+
+**Instrucción de carga automática**: cuando la sesión trate setup o configuración de alguna de las plataformas de la tabla, usa `Read` para cargar el stack file antes de responder por primera vez. Informa: "He cargado IT_stacks/<fichero>.md para esta sesión."
+
+**Para añadir o actualizar entradas**: usa el pseudo-skill `starter/skills/per--stack.md`. Gestiona deduplicación y evita contradicciones.
+```
+
+Para crear el directorio `IT_stacks/` si no existe, escribe un fichero `.gitkeep` vacío dentro.
+
 **8.2 — Bloque PERSONALIZATION en CLAUDE.md**: lee el `CLAUDE.md` del directorio de trabajo actual. Comprueba si ya contiene `<!-- PERSONALIZATION:START -->`.
 - Si existe: reemplaza el bloque completo (desde `<!-- PERSONALIZATION:START -->` hasta `<!-- PERSONALIZATION:END -->`).
 - Si no existe: añádelo al final del fichero.
@@ -223,6 +265,7 @@ Contenido del bloque (sustituye `<CLAUDE_PERSONAL_DIR>` por la ruta real; en Win
 @<CLAUDE_PERSONAL_DIR>/user.md
 @<CLAUDE_PERSONAL_DIR>/learnings.md
 @<CLAUDE_PERSONAL_DIR>/learnings/_index.md
+@<CLAUDE_PERSONAL_DIR>/IT_stacks/_index_stacks.md
 <!-- PERSONALIZATION:END -->
 ```
 
