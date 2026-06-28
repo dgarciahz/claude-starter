@@ -21,10 +21,11 @@ starter/
 ├── INIT.md               ← instalador autocontenido e idempotente
 ├── README.md             ← este fichero
 ├── assets/
-│   ├── config.yaml       ← configuración declarativa (MCP servers, permisos, output styles)
-│   ├── caveman.md        ← output style minimalista
+│   ├── config.yaml            ← configuración declarativa (MCP servers, permisos, output styles)
+│   ├── caveman.md             ← output style minimalista
+│   ├── destructive-check.sh   ← PreToolUse hook para operaciones destructivas (opt-in)
 │   ├── statusline-command.sh  ← script de statusline para Claude Code
-│   └── version-check.sh  ← comprueba versión del template al arranque
+│   └── version-check.sh       ← comprueba versión del template al arranque
 └── skills/               ← pseudo-skills (invocación explícita por ruta)
     ├── per--handoff.md   ← crea/recupera documentos de handoff entre sesiones
     ├── per--stack.md     ← gestión de IT Stack Docs
@@ -47,11 +48,9 @@ Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la r
 |-------|-------------|
 | `/gh--pull` | Sincroniza la rama local con el remote (git pull) |
 | `/gh--push` | Commit y push a GitHub con mensaje de commit generado automáticamente |
-| `/per--handoff` | Crea o recupera un documento de handoff para retomar trabajo en la próxima sesión |
 | `/per--history` | Lee el historial de sesiones y presenta un resumen ponderado por antigüedad |
 | `/per--learn` | Añade aprendizajes a `learnings.md` en `CLAUDE_PERSONAL_DIR` |
 | `/per--session-close` | Genera un resumen de la sesión y lo guarda en el historial persistente |
-| `/sys--context-report` | Regenera `project-tools.html` con información actualizada de MCP servers y skills |
 | `/sys--template-pull` | Actualiza skills y framework del proyecto desde el template `claude-starter` |
 | `/sys--template-push` | Propaga mejoras de skills desde el proyecto al template `claude-starter` |
 
