@@ -1,0 +1,9 @@
+skills:
+  - gh--pull
+  - gh--push
+  - per--history
+  - per--session-close
+  - per--learn
+  - sys--template-pull
+  - sys--template-push
+agents: []

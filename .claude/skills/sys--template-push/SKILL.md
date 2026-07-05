@@ -12,13 +12,11 @@ Usar cuando el usuario invoque `/sys--template-push` o pida sincronizar / propag
 
 - **Repo remoto del template**: `https://github.com/dgarciahz/claude-starter`
 
-## Agents incluidos en el template
+## Manifest del framework
 
-Solo se sincronizan estos agents (lista explícita). El usuario puede tener agents propios en el proyecto que NO deben subirse al template:
+La lista de skills y agents que pertenecen al framework starter vive en `starter/config/manifest.yaml` (no en este SKILL.md). Ese fichero es la única fuente de verdad de scope, y la lee también `sys--template-pull`.
 
-_(ninguno por ahora)_
-
-Si el usuario pide añadir o quitar un agent de esta lista, actualiza el SKILL.md antes de continuar.
+Si el usuario pide añadir o quitar un skill o agent del template, edita `starter/config/manifest.yaml` antes de continuar — no añadas listas en prosa aquí.
 
 ## Pseudo-skills incluidos en el template
 
@@ -29,40 +27,26 @@ Pseudo-skills actuales:
 - `starter/skills/per--stack.md` — gestión de IT Stack Docs
 - `starter/skills/sys--context-report.md` — regenera `project-tools.html` con MCP servers y skills
 
-## Skills incluidos en el template
-
-Solo se sincronizan estos skills (lista explícita). El usuario puede tener skills propios en el proyecto que NO deben subirse al template:
-
-- `gh--pull`
-- `gh--push`
-- `per--history`
-- `per--session-close`
-- `per--learn`
-- `sys--template-pull`
-- `sys--template-push`
-
-Si el usuario pide añadir o quitar un skill de esta lista, actualiza el SKILL.md antes de continuar.
-
 ## Instrucciones
 
 Sigue estos pasos en orden:
 
 ### 1. Commit de cambios pendientes
 
-Antes de sincronizar, asegúrate de que no hay cambios sin commitear en `.claude/skills/` o `starter/`. Ejecuta:
+Antes de sincronizar, asegúrate de que no hay cambios sin commitear en las rutas del manifest. Ejecuta:
 
 ```bash
 git status --short
 ```
 
-Si hay cambios pendientes en `.claude/skills/` o `starter/`, haz commit automáticamente:
+Lee `starter/config/manifest.yaml` y, si hay cambios pendientes en alguna de sus rutas, haz commit automáticamente añadiendo solo esas rutas (una por skill/agent del manifest, más `starter/` completo):
 
 ```bash
-git add .claude/skills/ starter/
+git add .claude/skills/<skill1> .claude/skills/<skill2> ... .claude/agents/<agent1> ... starter/
 git commit -m "Prepara skills/assets para sincronización con template — <fecha>"
 ```
 
-Si hay cambios en otros archivos fuera de estos directorios, infórmaselo al usuario pero no los incluyas en el commit — son responsabilidad suya.
+No uses `git add .claude/` a secas — se llevaría cualquier skill/agent/config ajeno al framework que exista en este repo. Si hay cambios en archivos fuera de las rutas del manifest y `starter/`, infórmaselo al usuario pero no los incluyas en el commit — son responsabilidad suya.
 
 ### 2. Sincronizar starter/assets/config.yaml
 
@@ -95,7 +79,7 @@ Si aparece en el diff → salta este paso.
 
 Si no aparece:
 
-1. Toma la lista de skills del template.
+1. Toma la lista de skills de `starter/config/manifest.yaml`.
 2. Lee `starter/README.md` y extrae las filas de la tabla de skills.
 3. Para cada skill de la lista: lee la primera línea descriptiva de su `SKILL.md` (la que sigue al encabezado `#`). Compárala con la descripción en la tabla.
    - Skill nuevo (no tiene fila): añade una fila.
@@ -106,11 +90,15 @@ Si no aparece:
 
 ### 4. Commit y push
 
+Añade solo las rutas declaradas en `starter/config/manifest.yaml`, más `starter/` completo:
+
 ```bash
-git add .claude/ starter/
+git add .claude/skills/<skill1> .claude/skills/<skill2> ... .claude/agents/<agent1> ... starter/
 git commit -m "Sincroniza skills/assets — <fecha>"
 git push
 ```
+
+No uses `git add .claude/` a secas — es el bug que este skill debe evitar: se llevaría al template cualquier archivo suelto de `.claude/` (config local, skills experimentales, etc.) que no pertenezca al framework.
 
 ### 5. Actualizar starter/config/version
 
@@ -134,5 +122,6 @@ Informa al usuario de:
 ## Notas
 
 - NUNCA copies `CLAUDE.md`, `.mcp.json`, ni `.claude/settings.local.json` al template — son propios de cada proyecto.
+- `starter/config/manifest.yaml` es la única fuente de verdad de qué skills/agents pertenecen al framework. NUNCA uses `git add .claude/` a secas en este skill — siempre añade las rutas del manifest una a una.
 - Si el usuario quiere actualizar solo un skill concreto, acepta el nombre como argumento e informa de qué se sincronizaría.
 - Tras el push, el template queda actualizado pero los proyectos ya creados desde él NO reciben los cambios automáticamente — eso es por diseño (usan `/sys--template-pull` para actualizar).

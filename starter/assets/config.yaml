@@ -7,9 +7,6 @@ mcp_servers:
   context7:
     package: "@upstash/context7-mcp@latest"
     description: "Documentación actualizada de librerías en contexto de Claude"
-  notebooklm:
-    package: "notebooklm-mcp (pip install notebooklm-mcp)"
-    description: "Acceso a NotebookLM para research, consultas conversacionales y síntesis de documentos"
 
 permissions:
   - "Bash(git *)"
