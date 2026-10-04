@@ -12,7 +12,7 @@ Dile a Claude:
 
 o cualquier variante como "inicializa el proyecto" o "inicializa el starter framework". Claude leerá `starter/INIT.md` y configurará todo.
 
-INIT.md es idempotente — puede ejecutarse múltiples veces sin duplicar configuración. Re-ejecútalo después de `sys--template-pull` para aplicar cambios del template.
+INIT.md es idempotente — puede ejecutarse múltiples veces sin duplicar configuración. Re-ejecútalo después de `sys--template-pull starter` para aplicar cambios del template.
 
 ## Contenido
 
@@ -52,15 +52,15 @@ Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la r
 | `/per--learn` | Añade aprendizajes a `learnings.md` en `CLAUDE_PERSONAL_DIR` |
 | `/per--add-task` | Declara una tarea durante la sesión; `per--session-close` la valida al cerrar |
 | `/per--session-close` | Genera un resumen de la sesión y lo guarda en el historial persistente |
-| `/sys--template-pull` | Actualiza skills y framework del proyecto desde el template `claude-starter` |
-| `/sys--template-push` | Propaga mejoras de skills desde el proyecto al template `claude-starter` |
+| `/sys--template-pull <fw>` | Actualiza skills y framework `<fw>` del proyecto desde su repo template |
+| `/sys--template-push <fw>` | Propaga mejoras de skills y del framework `<fw>` desde el proyecto a su repo template |
 
 ## Actualizar el framework
 
 Para recibir mejoras del template en tu proyecto:
 
 ```
-/sys--template-pull
+/sys--template-pull starter
 ```
 
 Después de hacer pull, re-ejecuta `starter/INIT.md` para aplicar cambios en la configuración.
@@ -68,7 +68,7 @@ Después de hacer pull, re-ejecuta `starter/INIT.md` para aplicar cambios en la 
 Para propagar mejoras de skills desde tu proyecto al template:
 
 ```
-/sys--template-push
+/sys--template-push starter
 ```
 
 ## Personalización
