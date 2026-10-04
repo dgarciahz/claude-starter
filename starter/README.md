@@ -47,9 +47,7 @@ Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la r
 | `/gh--pull` | Sincroniza la rama local con el remote (git pull) |
 | `/gh--push` | Commit y push a GitHub con mensaje de commit generado automáticamente |
 | `/per--history` | Lee el historial de sesiones y presenta un resumen ponderado por antigüedad |
-| `/per--learn` | Añade aprendizajes a `learnings.md` en `CLAUDE_PERSONAL_DIR` |
 | `/per--add-task` | Declara una tarea durante la sesión; `per--session-close` la valida al cerrar |
-| `/per--stack` | Añade o actualiza entradas en los stack docs de `IT_stacks/` en `CLAUDE_PERSONAL_DIR` |
 | `/per--session-close` | Genera un resumen de la sesión y lo guarda en el historial persistente |
 | `/sys--template-pull <fw>` | Actualiza skills y framework `<fw>` del proyecto desde su repo template |
 | `/sys--template-push <fw>` | Propaga mejoras de skills y del framework `<fw>` desde el proyecto a su repo template |
@@ -76,7 +74,4 @@ El sistema de personalización persiste en `$CLAUDE_PERSONAL_DIR/` (fuera del re
 
 - `soul.md` — identidad y principios de Claude
 - `user.md` — preferencias del usuario
-- `learnings.md` — observaciones acumuladas
-- `learnings/` — ficheros temáticos de aprendizajes (gestionados con `/per--learn`)
-- `IT_stacks/` — recetas de setup por plataforma (gestionados con `per--stack`)
 - `history/` — historial de sesiones

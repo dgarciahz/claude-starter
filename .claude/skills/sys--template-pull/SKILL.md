@@ -79,6 +79,8 @@ No descarga ni modifica `.mcp.json`, `settings.local.json` ni `CLAUDE.md`.
 
 ### 6. Comparar config del template con el proyecto
 
+Si `<fw>/assets/config.yaml` no existe en el template, omite este paso.
+
 Lee `<fw>/assets/config.yaml` recién descargado y compáralo con `.mcp.json` del proyecto (si existe).
 
 Si hay servers en el config que **no están en el proyecto**, muéstralos:
