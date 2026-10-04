@@ -50,6 +50,7 @@ Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la r
 | `/gh--push` | Commit y push a GitHub con mensaje de commit generado automáticamente |
 | `/per--history` | Lee el historial de sesiones y presenta un resumen ponderado por antigüedad |
 | `/per--learn` | Añade aprendizajes a `learnings.md` en `CLAUDE_PERSONAL_DIR` |
+| `/per--add-task` | Declara una tarea durante la sesión; `per--session-close` la valida al cerrar |
 | `/per--session-close` | Genera un resumen de la sesión y lo guarda en el historial persistente |
 | `/sys--template-pull` | Actualiza skills y framework del proyecto desde el template `claude-starter` |
 | `/sys--template-push` | Propaga mejoras de skills desde el proyecto al template `claude-starter` |

@@ -4,6 +4,7 @@ skills:
   - per--history
   - per--session-close
   - per--learn
+  - per--add-task
   - sys--template-pull
   - sys--template-push
 agents: []
