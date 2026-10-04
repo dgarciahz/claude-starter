@@ -28,7 +28,6 @@ starter/
 │   └── version-check.sh       ← comprueba versión del template al arranque
 └── skills/               ← pseudo-skills (invocación explícita por ruta)
     ├── per--handoff.md   ← crea/recupera documentos de handoff entre sesiones
-    ├── per--stack.md     ← gestión de IT Stack Docs
     └── sys--context-report.md ← regenera project-tools.html con MCP servers y skills
 ```
 
@@ -39,7 +38,6 @@ Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la r
 ```
 "ejecuta starter/skills/per--handoff.md"
 "ejecuta starter/skills/sys--context-report.md"
-"ejecuta starter/skills/per--stack.md"
 ```
 
 ## Skills disponibles (tras inicializar)
@@ -51,6 +49,7 @@ Los pseudo-skills no se cargan en el contexto por defecto. Se invocan dando la r
 | `/per--history` | Lee el historial de sesiones y presenta un resumen ponderado por antigüedad |
 | `/per--learn` | Añade aprendizajes a `learnings.md` en `CLAUDE_PERSONAL_DIR` |
 | `/per--add-task` | Declara una tarea durante la sesión; `per--session-close` la valida al cerrar |
+| `/per--stack` | Añade o actualiza entradas en los stack docs de `IT_stacks/` en `CLAUDE_PERSONAL_DIR` |
 | `/per--session-close` | Genera un resumen de la sesión y lo guarda en el historial persistente |
 | `/sys--template-pull <fw>` | Actualiza skills y framework `<fw>` del proyecto desde su repo template |
 | `/sys--template-push <fw>` | Propaga mejoras de skills y del framework `<fw>` desde el proyecto a su repo template |

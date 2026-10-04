@@ -6,6 +6,7 @@ skills:
   - per--session-close
   - per--learn
   - per--add-task
+  - per--stack
   - sys--template-pull
   - sys--template-push
 agents: []
