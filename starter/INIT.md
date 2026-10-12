@@ -37,7 +37,7 @@ git remote get-url origin
 Busca `.gitignore` en la raíz del proyecto. Si no existe, créalo.
 
 1. **Elimina** las líneas `CLAUDE.md` y `.mcp.json` del `.gitignore` **si están presentes** — en proyectos derivados estos ficheros deben quedar trackeados en git.
-2. **Añade** `.claude/settings.local.json` **solo si no está ya presente**.
+2. **Añade** `.claude/settings.local.json` y `.claude/settings.json` **solo si no están ya presentes**. `settings.json` es propio de cada proyecto: starter solo le añade sus hooks (pasos 5.4 y 5.5) y no lo versiona. Si el proyecto ya lo tiene trackeado, no ejecutes `git rm --cached`; es decisión suya.
 
 ### Paso 3 — Crear o actualizar CLAUDE.md
 
@@ -234,7 +234,7 @@ Contenido del bloque (sustituye `<CLAUDE_PERSONAL_DIR>` por la ruta real; en Win
 **Modo derivado**: `CLAUDE.md` y `.mcp.json` ya están des-gitignoreados por el paso 2, así que pueden añadirse normalmente.
 
 ```bash
-git add .mcp.json CLAUDE.md .gitignore .claude/settings.local.json .claude/settings.json
+git add .mcp.json CLAUDE.md .gitignore .claude/settings.local.json
 git commit -m "Inicializa proyecto desde starter framework — <fecha>"
 ```
 
