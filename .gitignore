@@ -2,6 +2,7 @@
 CLAUDE.md
 .mcp.json
 .claude/settings.local.json
+.claude/settings.json
 
 # Archivos de sistema
 .DS_Store
