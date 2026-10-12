@@ -63,6 +63,8 @@ No uses `git add .claude/` a secas — se llevaría cualquier skill/agent/config
 
 ### 3. Sincronizar `<fw>/assets/config.yaml`
 
+Si `<fw>/assets/config.yaml` no existe (framework sin MCP ni permisos propios, ej. `architect`), omite este paso.
+
 Lee `.mcp.json` del proyecto y compáralo con `<fw>/assets/config.yaml#mcp_servers`.
 
 **3.1 — MCP servers nuevos**: si hay servers en el proyecto que no están en el catálogo, pregunta:
