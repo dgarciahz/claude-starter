@@ -115,8 +115,33 @@ git remote get-url origin
 ```bash
 git add .claude/skills/<prefix>--* .claude/agents/<prefix>--* <fw>/
 git commit -m "Sincroniza skills/assets — <fecha>"
+```
+
+Antes del `git push`, ejecuta la **comprobación de ficheros ajenos** (ver abajo). Solo si pasa:
+
+```bash
 git push
 ```
+
+#### Comprobación de ficheros ajenos
+
+`git push` sube todos los commits locales pendientes, no solo el scope del framework. Esta comprobación evita publicar skills/agents de otro framework.
+
+1. Lista los ficheros de los commits que se van a subir:
+
+   ```bash
+   git diff --name-only @{u}..HEAD
+   ```
+
+   Sin upstream configurado: `git diff --name-only origin/main..HEAD`.
+
+2. Un fichero es **ajeno** si su ruta casa con `.claude/skills/<x>--*` o `.claude/agents/<x>--*` y `<x>` NO es un prefix de `prefixes` del manifest de `<fw>`. `<x>` es el tramo del nombre anterior al primer `--`.
+
+3. Si hay algún fichero ajeno: NO hagas push. Informa de la lista de ficheros ajenos y de los commits que los introducen (`git log --oneline @{u}..HEAD -- <rutas>`), explica que pertenecen a otro framework y detente. No reescribas historia ni fuerces.
+
+4. Si no hay ficheros ajenos (todo es scope del framework o ficheros normales del repo como `README.md` o `.gitignore`): continúa con el push.
+
+No leas `.gitignore` para esta decisión: el criterio es el manifest.
 
 **5b. Origin != `repo`** (proyecto derivado). No empujes la historia del proyecto; publica solo las rutas del framework sobre la historia del repo del framework mediante un worktree temporal:
 
@@ -148,6 +173,11 @@ Tras el push, escribe el hash del commit subido (`git rev-parse HEAD` en 5a, `gi
 echo $HASH > <fw>/config/version
 git add <fw>/config/version
 git commit -m "chore: actualiza versión de <fw> — $HASH"
+```
+
+En 5a, ejecuta la comprobación de ficheros ajenos de 5a antes de este `git push`; si no pasa, detente igual. Si pasa:
+
+```bash
 git push
 ```
 
@@ -164,4 +194,6 @@ Informa de:
 
 - NUNCA copies `CLAUDE.md`, `.mcp.json` ni `.claude/settings.local.json` al template — son propios de cada proyecto.
 - Los `prefixes` del manifest son la única fuente de verdad del scope. NUNCA uses `git add .claude/` a secas — siempre añade solo los globs `<prefix>--*`.
+- El push de 5a sube todo lo pendiente en local; por eso se comprueba antes que no haya ficheros de otro framework.
+- El repo de un framework (origin == `repo`) no debe tener trackeados skills/agents de otros frameworks; en proyectos derivados sí pueden estarlo.
 - Tras el push, los proyectos ya creados desde el template NO reciben los cambios automáticamente — eso es por diseño (usan `/core--template-pull <fw>`).
