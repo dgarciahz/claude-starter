@@ -1,10 +1,10 @@
-# Skill: per--session-close
+# Skill: core--session-close
 
 Genera un resumen de la sesión actual y lo guarda en el historial persistente.
 
 ## Trigger
 
-Usar cuando el usuario invoque `/per--session-close` o pida cerrar/guardar la sesión.
+Usar cuando el usuario invoque `/core--session-close` o pida cerrar/guardar la sesión.
 
 ## Instrucciones
 
@@ -25,7 +25,7 @@ No copies tareas pendientes de sesiones anteriores sin pasar por este análisis.
 
 ### 2b. Revisar tareas declaradas durante la sesión
 
-Si existe `$CLAUDE_PERSONAL_DIR/history/.session-tasks.md` (creado por `per--add-task`), léelo y evalúa cada entrada con las mismas categorías del paso 2:
+Si existe `$CLAUDE_PERSONAL_DIR/history/.session-tasks.md` (creado por `core--add-task`), léelo y evalúa cada entrada con las mismas categorías del paso 2:
 
 - **Completada** → inclúyela en "Tareas completadas"
 - **Resuelta de otra forma** → no la arrastres; menciónala en "Decisiones tomadas" si es relevante

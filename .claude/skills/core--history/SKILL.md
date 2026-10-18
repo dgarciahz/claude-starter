@@ -1,10 +1,10 @@
-# Skill: per--history
+# Skill: core--history
 
 Lee el historial de sesiones y presenta un resumen ponderado según la antigüedad.
 
 ## Trigger
 
-Usar cuando el usuario invoque `/per--history` o pida ver el historial de sesiones anteriores.
+Usar cuando el usuario invoque `/core--history` o pida ver el historial de sesiones anteriores.
 
 ## Instrucciones
 

@@ -4,7 +4,7 @@ Regenera la página `project-tools.html` del proyecto con información actualiza
 
 ## Trigger
 
-Usar cuando el usuario invoque este fichero explícitamente (ej. `starter/skills/sys--context-report.md`) o pida actualizar/regenerar la página de herramientas del proyecto.
+Usar cuando el usuario invoque este fichero explícitamente (ej. `starter/skills/core--context-report.md`) o pida actualizar/regenerar la página de herramientas del proyecto.
 
 ## Instrucciones
 

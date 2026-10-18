@@ -1,10 +1,10 @@
-# Skill: per--add-task
+# Skill: core--add-task
 
-Añade una tarea al borrador de tareas de la sesión en curso, para que `per--session-close` la valide al cerrar en vez de reconstruirla.
+Añade una tarea al borrador de tareas de la sesión en curso, para que `core--session-close` la valide al cerrar en vez de reconstruirla.
 
 ## Trigger
 
-Usar SOLO cuando el usuario invoque `/per--add-task`. No invocar por iniciativa propia.
+Usar SOLO cuando el usuario invoque `/core--add-task`. No invocar por iniciativa propia.
 
 ## Instrucciones
 
@@ -14,7 +14,7 @@ Obtén la ruta desde la variable de entorno `CLAUDE_PERSONAL_DIR`. Si no está d
 
 ### 2. Determinar la tarea
 
-Si el usuario pasó texto como argumento (ej. `/per--add-task migrar X a Y antes de tocar Z`), úsalo como punto de partida.
+Si el usuario pasó texto como argumento (ej. `/core--add-task migrar X a Y antes de tocar Z`), úsalo como punto de partida.
 
 Si no hay argumento, infiere la tarea de la conversación reciente y muéstrasela al usuario para que la confirme o corrija antes de guardar.
 
@@ -30,7 +30,7 @@ Añade al final, sin tocar las entradas existentes:
 - [YYYY-MM-DD] [descripción de la tarea con contexto]
 ```
 
-Usa la fecha actual. La fecha permite a `per--session-close` detectar entradas huérfanas de sesiones que no se cerraron.
+Usa la fecha actual. La fecha permite a `core--session-close` detectar entradas huérfanas de sesiones que no se cerraron.
 
 ### 4. Confirmar
 
@@ -38,5 +38,5 @@ Muestra la entrada añadida tal como quedó y cuántas tareas hay ahora en el bo
 
 ## Notas
 
-- NUNCA sobreescribas ni borres entradas existentes — solo añade al final. El borrador lo vacía `per--session-close`.
+- NUNCA sobreescribas ni borres entradas existentes — solo añade al final. El borrador lo vacía `core--session-close`.
 - Una invocación = una tarea. Si el usuario da varias, añade una línea por cada una.

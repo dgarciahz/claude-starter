@@ -2,17 +2,17 @@
 
 Actualiza los skills y el directorio `<fw>/` del proyecto actual desde el repo del framework `<fw>`, sin tocar la configuración local (`.mcp.json`, `settings.local.json`, `CLAUDE.md`).
 
-Uso: `/sys--template-pull <fw> [url]`. Ejemplo: `/sys--template-pull starter`.
+Uso: `/core--template-pull <fw> [url]`. Ejemplo: `/core--template-pull starter`.
 
 ## Trigger
 
-Usar cuando el usuario invoque `/sys--template-pull <fw>` o pida actualizar/sincronizar skills desde un template.
+Usar cuando el usuario invoque `/core--template-pull <fw>` o pida actualizar/sincronizar skills desde un template.
 
 ## Convención de framework
 
-Todo framework `<fw>` tiene la misma estructura (ver `sys--template-push`): `<fw>/config/manifest.yaml` (con `repo`, `skills`, `agents`), `<fw>/config/version`, `<fw>/assets/config.yaml`, `<fw>/README.md` e `<fw>/INIT.md`.
+Todo framework `<fw>` tiene la misma estructura (ver `core--template-push`): `<fw>/config/manifest.yaml` (con `repo` y `prefixes`), `<fw>/config/version`, `<fw>/assets/config.yaml`, `<fw>/README.md` e `<fw>/INIT.md`.
 
-El manifest es la única fuente de verdad de qué skills y agents pertenecen al framework.
+Los `prefixes` del manifest son la única fuente de verdad de qué skills y agents pertenecen al framework: `.claude/skills/<prefix>--*` y `.claude/agents/<prefix>--*`.
 
 ## Instrucciones
 
@@ -57,23 +57,25 @@ git show template-<fw>/main:<fw>/config/manifest.yaml
 
 Si el `repo` del manifest remoto difiere de la URL usada, avisa al usuario antes de continuar.
 
-Con las rutas de skills/agents que liste, muestra un diff acotado a esas rutas más `<fw>/` completo:
+Con los `prefixes` que liste, muestra un diff acotado a esos globs más `<fw>/` completo:
 
 ```bash
-git diff HEAD template-<fw>/main -- .claude/skills/<skill1> ... .claude/agents/<agent1> ... <fw>/
+git diff HEAD template-<fw>/main -- ".claude/skills/<prefix>--*" ".claude/agents/<prefix>--*" <fw>/
 ```
 
 Si no hay diferencias, informa y detente — el proyecto ya está al día.
 
 ### 5. Bajar skills, agents y el directorio del framework
 
-Trae solo las rutas declaradas en el manifest, nunca `.claude/skills/` o `.claude/agents/` completas — así nunca se toca un skill/agent propio del proyecto que no esté en el manifest:
+Trae solo las rutas que casan con los prefixes del manifest remoto, nunca `.claude/skills/` o `.claude/agents/` completas — así nunca se toca un skill/agent propio del proyecto sin esos prefixes:
 
 ```bash
-git checkout template-<fw>/main -- .claude/skills/<skill1> .claude/skills/<skill2> ...
-git checkout template-<fw>/main -- .claude/agents/<agent1> ...
+git checkout template-<fw>/main -- ".claude/skills/<prefix>--*"
+git checkout template-<fw>/main -- ".claude/agents/<prefix>--*"
 git checkout template-<fw>/main -- <fw>/
 ```
+
+`git checkout` no borra lo que el template eliminó o renombró. Lista los locales que casan con el prefix pero ya no existen en `template-<fw>/main` (`git ls-tree -d --name-only template-<fw>/main .claude/skills/` frente a `ls .claude/skills/<prefix>--*`) y pregunta antes de borrarlos con `git rm -r`.
 
 No descarga ni modifica `.mcp.json`, `settings.local.json` ni `CLAUDE.md`.
 
@@ -98,7 +100,7 @@ Si no hay diff de MCP servers (o el usuario no quiere ninguno), continúa sin to
 Añade solo las rutas traídas en el paso 5. No uses `git add .claude/skills/` a secas:
 
 ```bash
-git add .claude/skills/<skill1> ... .claude/agents/<agent1> ... <fw>/
+git add .claude/skills/<prefix>--* .claude/agents/<prefix>--* <fw>/
 git commit -m "Sincroniza skills/framework desde template <fw> — <fecha>"
 ```
 
@@ -111,7 +113,7 @@ git commit -m "Añade MCP servers desde template <fw> — <fecha>"
 ### 8. Confirmar al usuario
 
 Informa de:
-- Qué skills/agents fueron actualizados
+- Qué skills/agents fueron actualizados o eliminados
 - Si se actualizó `<fw>/` (INIT.md, assets)
 - Qué MCP servers se añadieron (si los hay)
 - Recordatorio: "Puedes re-ejecutar `<fw>/INIT.md` para aplicar cambios del framework (idempotente)"
@@ -122,5 +124,5 @@ Informa de:
 - NUNCA sobreescribas `.mcp.json` completo si ya existe — solo añade los servers nuevos elegidos.
 - NUNCA sobreescribas `.claude/settings.local.json` completo — haz merge de `enabledMcpjsonServers`.
 - NUNCA toques `CLAUDE.md` — es propio del proyecto.
-- El scope lo decide el manifest del template, no una carpeta completa. NUNCA hagas `git checkout template-<fw>/main -- .claude/skills/` a secas.
+- El scope lo deciden los `prefixes` del manifest del template, no una carpeta completa. NUNCA hagas `git checkout template-<fw>/main -- .claude/skills/` a secas.
 - Este skill es idempotente: ejecutarlo varias veces no causa daño.

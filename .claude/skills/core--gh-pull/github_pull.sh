@@ -1,7 +1,7 @@
 #!/bin/bash
 # github_pull.sh - Pull desde remote hacia la rama local
 # Uso:
-#   bash .claude/skills/gh--pull/github_pull.sh [rama] [remote]
+#   bash .claude/skills/core--gh-pull/github_pull.sh [rama] [remote]
 
 set -e
 

@@ -4,7 +4,7 @@ Hace commit y push de los cambios actuales a GitHub. Genera el mensaje de commit
 
 ## Trigger
 
-Usar cuando el usuario invoque `/gh--push` o pida hacer commit y push a GitHub. Acepta un mensaje de commit opcional como argumento.
+Usar cuando el usuario invoque `/core--gh-push` o pida hacer commit y push a GitHub. Acepta un mensaje de commit opcional como argumento.
 
 ## Instrucciones
 
@@ -22,12 +22,12 @@ git --no-pager diff
 
 Con mensaje (cuando hay diff):
 ```bash
-bash .claude/skills/gh--push/github_push.sh "MENSAJE"
+bash .claude/skills/core--gh-push/github_push.sh "MENSAJE"
 ```
 
 Sin mensaje (cuando no hay diff):
 ```bash
-bash .claude/skills/gh--push/github_push.sh
+bash .claude/skills/core--gh-push/github_push.sh
 ```
 
 ### 3. Mostrar el output del script al usuario.

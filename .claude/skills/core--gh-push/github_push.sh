@@ -1,8 +1,8 @@
 #!/bin/bash
 # github_push.sh - Commit y push excluyendo .claude/skills/ y .claude/agents/
 # Uso:
-#   bash .claude/skills/gh--push/github_push.sh "mensaje" [rama] [remote]
-#   bash .claude/skills/gh--push/github_push.sh "" [rama] [remote]   # solo push
+#   bash .claude/skills/core--gh-push/github_push.sh "mensaje" [rama] [remote]
+#   bash .claude/skills/core--gh-push/github_push.sh "" [rama] [remote]   # solo push
 
 set -e
 
